@@ -1,6 +1,7 @@
 import gym
 from models import get_model
 from funcs import decay_and_normalize
+import random
 
 
 # create gym
@@ -11,25 +12,26 @@ env.reset()
 model = get_model()
 
 # totaal
-all_obs = []
-all_rewards = []
-all_done = []
+all_obs, all_rewards, all_done, all_actions = [], [], [], []
 for i in range(100):
     # game niveau
-    observations = []
-    rewards = []
-    dones = []
+    observations, rewards, dones, actions = [], [], [], []
     done = False
+    obs = env.reset()
     while not done:
         # turn niveau, we hebben info niet nodig
-        observation, reward, done, _ = env.step(0)
-        observations.append(observation)
-        rewards.append(reward)
+        action = 1 if random.random() < model(obs.reshape(1, -1))[0] else 0
+
+        obs, reward, done, _ = env.step(action)
+
+        observations.append(obs)
         dones.append(done)
+        rewards.append(reward)
+        actions.append(action)
+
         env.render()
 
     # laatste turn voor game over
-    env.reset()
     all_done.append(dones)
     all_rewards.append(rewards)
     all_obs.append(observations)
