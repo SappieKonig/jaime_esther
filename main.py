@@ -1,3 +1,8 @@
+# Jullie zijn wel erg ver, prachtig om die indeling in meerdere files te zien, goed bezig!
+
+
+
+
 import gym
 from models import get_model
 from funcs import decay_and_normalize
