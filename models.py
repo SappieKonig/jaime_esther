@@ -1,8 +1,7 @@
 import tensorflow as tf
-from funcs import super_loss
 
 
-def get_model(learningrate=3e-5, path=None):
+def get_model(path=None):
     """Define and compile the tf model"""
     neurons = 128
     input = tf.keras.layers.Input(4)
@@ -18,8 +17,6 @@ def get_model(learningrate=3e-5, path=None):
 
     if path:
         agent.load_weights(path)
-
-    agent.compile(tf.keras.optimizers.Adam(learningrate), super_loss)
 
     return agent
 
