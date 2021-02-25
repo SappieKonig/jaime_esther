@@ -1,3 +1,11 @@
+# Jullie zijn ooooontzettend ver! Volgende stap is het toevoegen van de rewards in het berekenen van de loss,
+# daarna tijd om te leren!
+# Sidenote: begrijpen jullie allebei even goed hoe de code werkt? Als dat niet zo is, praat elkaar lekker bij,
+# jullie hebben alle tijd.
+
+
+
+
 import gym
 from models import get_model
 from funcs import decay_and_normalize
@@ -50,6 +58,6 @@ train_vars = model.trainable_variables
 grads = tape.gradient(loss, train_vars)
 optimizer.apply_gradients(zip(grads, train_vars))
 
-x =1
+x = 1
 
 
