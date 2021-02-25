@@ -28,15 +28,15 @@ for i in range(100):
     observations, rewards, dones, actions = [], [], [], []
     done = False
     obs = env.reset()
+    reward = 1
     while not done:
         # turn niveau, we hebben info niet nodig
         action = 1 if random.random() < model(obs.reshape(1, -1))[0] else 0
-        obs, reward, done, _ = env.step(action)
-
+        actions.append(action)
         observations.append(obs)
         dones.append(done)
         rewards.append(reward)
-        actions.append(action)
+        obs, reward, done, _ = env.step(action)
 
         # env.render()
 
@@ -47,7 +47,6 @@ for i in range(100):
 
 
 all_rewards = decay_and_normalize(all_rewards, 0.9)
-print(all_rewards)
 
 optimizer = tf.keras.optimizers.Adam(3e-4)
 with tf.GradientTape() as tape:
